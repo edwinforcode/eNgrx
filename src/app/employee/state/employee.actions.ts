@@ -17,3 +17,8 @@ export const clearSeleectedEmployee = createAction(
 export const intializeEmployee = createAction(
   '[Employee] Clear the selected employee'
 );
+
+export const deleteEmployee = createAction(
+  '[Employee] Delete employee',
+  props<{ employee: Employee }>()
+);

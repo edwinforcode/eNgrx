@@ -34,4 +34,12 @@ export class EmployeeComponent implements OnInit {
   setSelectedEmployee(employee: Employee): void {
     this.store.dispatch(EmployeeActions.setSelectedEmployee({ employee }));
   }
+
+  deleteEmployee(employee: Employee): void {
+    if (employee && employee.employeeId) {
+      if (confirm(`Really delete the employee: ${employee.employeeName}`)) {
+        this.store.dispatch(EmployeeActions.deleteEmployee({ employee }));
+      }
+    }
+  }
 }
