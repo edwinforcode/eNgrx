@@ -1,31 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { getShowRegularEmployee } from './state/employee.reducer';
+import { getEmployees, getShowRegularEmployee } from './state/employee.reducer';
 import { State } from './state/employee.reducer';
 import * as EmployeeActions from './state/employee.actions';
 import { Employee } from '../app.types';
 import { getSelectedEmployee } from './state/employee.reducer';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html'
 })
 export class EmployeeComponent implements OnInit {
-  showRegularEmployee: boolean;
-  showContractEmployee: boolean;
-  selectedEmployee: Employee;
+  showRegularEmployee$: Observable<boolean>;
+  showContractEmployee$: Observable<boolean>;
+  selectedEmployee$: Observable<Employee>;
+  employees$: Observable<Employee[]>;
+
   constructor(private store: Store<State>) {}
   ngOnInit(): void {
-    this.store
-      .select(getShowRegularEmployee)
-      .subscribe(
-        showRegularEmployee => (this.showRegularEmployee = showRegularEmployee)
-      );
-    this.store
-      .select(getSelectedEmployee)
-      .subscribe(
-        selectedEmployee => (this.selectedEmployee = selectedEmployee)
-      );
+    this.employees$ = this.store.select(getEmployees);
+    this.store.dispatch(EmployeeActions.loadEmployees());
+
+    this.selectedEmployee$ = this.store.select(getSelectedEmployee);
+    this.showContractEmployee$ = this.store.select(getShowRegularEmployee);
+    this.showRegularEmployee$ = this.store.select(getShowRegularEmployee);
   }
   regularCheckChanged(): void {
     this.store.dispatch(EmployeeActions.toogleRegularEmployee());

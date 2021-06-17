@@ -84,5 +84,14 @@ export const employeeReducer = createReducer<EmployeeState>(
         selectedEmployee: { employeeId: '', employeeName: '', employeeType: '' }
       };
     }
+  ),
+  on(
+    EmployeeActions.loadEmployeesSuccess,
+    (state, action): EmployeeState => {
+      return {
+        ...state,
+        employees: action.employees
+      };
+    }
   )
 );

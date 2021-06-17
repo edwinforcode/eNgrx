@@ -6,12 +6,15 @@ import { EmployeeRoutingModule } from './employee-routing.module';
 import { EmployeeComponent } from './employee.component';
 import { StoreModule } from '@ngrx/store';
 import { employeeReducer } from './state/employee.reducer';
+import { EmployeeEffects } from './state/employee.effects';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   imports: [
     CommonModule,
     EmployeeRoutingModule,
-    StoreModule.forFeature('employees', employeeReducer)
+    StoreModule.forFeature('employees', employeeReducer),
+    EffectsModule.forFeature([EmployeeEffects])
   ],
   exports: [],
   declarations: [

@@ -22,3 +22,15 @@ export const deleteEmployee = createAction(
   '[Employee] Delete employee',
   props<{ employee: Employee }>()
 );
+
+export const loadEmployees = createAction('[Employee] Load Employees');
+
+export const loadEmployeesSuccess = createAction(
+  '[Employee] Load Employees Success',
+  props<{ employees: Employee[] }>()
+);
+
+export const loadEmployeesFaliure = createAction(
+  '[Employee] Load Employees Failure',
+  props<{ error: string }>()
+);
