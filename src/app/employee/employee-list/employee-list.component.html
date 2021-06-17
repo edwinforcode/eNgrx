@@ -1,15 +1,15 @@
 <div class="card">
 
-  <div class="card-header">
-  </div>
-
   <div class="card-body" *ngIf="employeesList">
     <div class="list-group">
       <button class="list-group-item list-group-item-action rounded-0"
               *ngFor="let employee of employeesList"
               [ngClass]="{'active': employee?.employeeId === selectedEmployee?.employeeId}"
               (click)="employeeSelected(employee)">{{ employee.employeeName }}
+              <i class="fa fa-trash p-2 text-danger float-end" (click)="deleteEmployee(employee)"></i>
+              <i class="fas fa-edit p-2 text-primary float-end" (click)="editEmployee(employee)"></i>        
       </button>
+
     </div>
   </div>
 </div>
@@ -17,5 +17,6 @@
 <div class="card" *ngIf="employeeDetail">
   <div class="card-body">
     <employee-detail [selectedEmployee]="employeeDetail"></employee-detail>
+    <employee-edit [employee]="editEmp"></employee-edit>
   </div>
 </div>

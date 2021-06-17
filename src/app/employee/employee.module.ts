@@ -8,19 +8,22 @@ import { StoreModule } from '@ngrx/store';
 import { employeeReducer } from './state/employee.reducer';
 import { EmployeeEffects } from './state/employee.effects';
 import { EffectsModule } from '@ngrx/effects';
+import { EmployeeEditComponent } from './employee-edit/employee-edit.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     EmployeeRoutingModule,
     StoreModule.forFeature('employees', employeeReducer),
-    EffectsModule.forFeature([EmployeeEffects])
+    EffectsModule.forFeature([EmployeeEffects]),
+    ReactiveFormsModule
   ],
   exports: [],
   declarations: [
     EmployeeComponent,
     EmployeeListComponent,
-    EmployeeListComponent,
+    EmployeeEditComponent,
     EmployeeDetailComponent
   ]
 })

@@ -38,3 +38,5 @@ export const loadEmployeesFaliure = createAction(
   '[Employee] Load Employees Failure',
   props<{ error: string }>()
 );
+
+export const saveEmployee = createAction('[Employee] Save Employee');

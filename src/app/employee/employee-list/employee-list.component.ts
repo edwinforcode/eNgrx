@@ -9,8 +9,15 @@ export class EmployeeListComponent {
   @Input() employeesList: Employee[];
   employeeDetail: Employee;
   selectedEmployee: Employee;
+  editEmp: Employee;
 
   employeeSelected(employee: Employee) {
     this.employeeDetail = employee;
   }
+
+  editEmployee(emp: Employee) {
+    this.editEmp = emp;
+  }
+
+  deleteEmployee(emp: Employee) {}
 }
