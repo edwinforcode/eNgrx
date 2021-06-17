@@ -13,3 +13,9 @@
     </div>
   </div>
 </div>
+
+<div class="card" *ngIf="employeeDetail">
+  <div class="card-body">
+    <employee-detail [selectedEmployee]="employeeDetail"></employee-detail>
+  </div>
+</div>

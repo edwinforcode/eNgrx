@@ -7,7 +7,10 @@ import { Employee } from '../../app.types';
 })
 export class EmployeeListComponent {
   @Input() employeesList: Employee[];
+  employeeDetail: Employee;
   selectedEmployee: Employee;
 
-  employeeSelected(employee: Employee) {}
+  employeeSelected(employee: Employee) {
+    this.employeeDetail = employee;
+  }
 }

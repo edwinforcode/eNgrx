@@ -5,6 +5,10 @@ export const toogleRegularEmployee = createAction(
   '[Employee] Toggle Regular Employee'
 );
 
+export const toogleContractorEmployee = createAction(
+  '[Employee] Toggle Contractor Employee'
+);
+
 export const setSelectedEmployee = createAction(
   '[Employee] Set the selected Employee',
   props<{ employee: Employee }>()

@@ -62,6 +62,15 @@ export const employeeReducer = createReducer<EmployeeState>(
     }
   ),
   on(
+    EmployeeActions.toogleContractorEmployee,
+    (state): EmployeeState => {
+      return {
+        ...state,
+        showContractEmployee: !state.showContractEmployee
+      };
+    }
+  ),
+  on(
     EmployeeActions.setSelectedEmployee,
     (state, action): EmployeeState => {
       return {

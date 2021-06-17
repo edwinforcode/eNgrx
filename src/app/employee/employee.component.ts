@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { getEmployees, getShowRegularEmployee } from './state/employee.reducer';
+import {
+  getEmployees,
+  getShowContractorEmployee,
+  getShowRegularEmployee
+} from './state/employee.reducer';
 import { State } from './state/employee.reducer';
 import * as EmployeeActions from './state/employee.actions';
 import { Employee } from '../app.types';
 import { getSelectedEmployee } from './state/employee.reducer';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-employee',
@@ -23,11 +28,29 @@ export class EmployeeComponent implements OnInit {
     this.store.dispatch(EmployeeActions.loadEmployees());
 
     this.selectedEmployee$ = this.store.select(getSelectedEmployee);
-    this.showContractEmployee$ = this.store.select(getShowRegularEmployee);
+    this.showContractEmployee$ = this.store.select(getShowContractorEmployee);
     this.showRegularEmployee$ = this.store.select(getShowRegularEmployee);
   }
   regularCheckChanged(): void {
     this.store.dispatch(EmployeeActions.toogleRegularEmployee());
+    if (this.showRegularEmployee$) {
+      this.employees$ = this.employees$.pipe(
+        map(emp => emp.filter(item => item.employeeType == 'Regular'))
+      );
+    } else {
+      this.employees$ = this.store.select(getEmployees);
+    }
+  }
+
+  contractorCheckChanged(): void {
+    this.store.dispatch(EmployeeActions.toogleContractorEmployee());
+    if (this.showContractEmployee$) {
+      this.employees$ = this.employees$.pipe(
+        map(emp => emp.filter(item => item.employeeType == 'Contractor'))
+      );
+    } else {
+      this.employees$ = this.store.select(getEmployees);
+    }
   }
 
   setSelectedEmployee(employee: Employee): void {
